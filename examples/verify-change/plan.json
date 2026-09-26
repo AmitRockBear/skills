@@ -1,0 +1,30 @@
+[
+  {
+    "start": 0,
+    "end": 10.8,
+    "speed": 2,
+    "caption": "Create a task and inspect its visible state",
+    "focus": {
+      "x": 0.71,
+      "y": 0.25,
+      "zoom": 1.35
+    }
+  },
+  {
+    "start": 10.8,
+    "end": 21.7,
+    "speed": 2,
+    "caption": "Complete the task, then check the Active filter",
+    "focus": {
+      "x": 0.71,
+      "y": 0.25,
+      "zoom": 1.35
+    }
+  },
+  {
+    "start": 21.7,
+    "end": 29.277567,
+    "speed": 1,
+    "caption": "After full navigation the task is absent; persistence is unverified"
+  }
+]

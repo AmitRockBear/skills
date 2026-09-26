@@ -1,0 +1,813 @@
+[
+ {
+  "scene": "intro",
+  "cap": "Hi there! I'm back, and today we're doing something bigger."
+ },
+ {
+  "scene": "intro",
+  "cap": "We're comparing three clouds for building AI agents: Cloudflare, Vercel and AWS.",
+  "say": "We're comparing three clouds for building A I agents: Cloudflare, Vercel and A W S."
+ },
+ {
+  "scene": "intro",
+  "cap": "No background needed. We'll build the same agent on all three, piece by piece, and see who does what best.",
+  "hold": 0.6
+ },
+ {
+  "scene": "meet",
+  "cap": "Let's meet the contenders. Think of them as three very different kitchens."
+ },
+ {
+  "scene": "meet",
+  "cap": "Cloudflare is a chain with a small kitchen in hundreds of cities. Your code runs close to every user, and most of the ingredients are made in-house."
+ },
+ {
+  "scene": "meet",
+  "cap": "Vercel is the designer kitchen. It's the home of Next.js and the AI SDK, built so that shipping an app feels effortless.",
+  "say": "Vercel is the designer kitchen. It's the home of Next J S and the A I S D K, built so that shipping an app feels effortless."
+ },
+ {
+  "scene": "meet",
+  "cap": "AWS is the giant warehouse. Hundreds of services, almost every tool you can imagine, but you assemble more of it yourself.",
+  "say": "A W S is the giant warehouse. Hundreds of services, almost every tool you can imagine, but you assemble more of it yourself."
+ },
+ {
+  "scene": "meet",
+  "cap": "All three can run a serious agent. The differences are in how, how much, and how easy.",
+  "hold": 0.6
+ },
+ {
+  "scene": "agent",
+  "cap": "Quick refresher. A chatbot answers and stops. An agent gets a goal and works in a loop: think, act, look at the result, and repeat until the job is done."
+ },
+ {
+  "scene": "agent",
+  "cap": "To do that, it needs a body to live in, code for the loop, a brain, memory, a sense of time, hands for tools, and senses for talking to people."
+ },
+ {
+  "scene": "agent",
+  "cap": "Plus safety rules, a way to pay, a way to ship it, and a bill at the end. Those are our chapters.",
+  "hold": 0.5
+ },
+ {
+  "scene": "atlas",
+  "cap": "Our running example is Atlas, a trip-planning agent."
+ },
+ {
+  "scene": "atlas",
+  "cap": "A traveller types: \"Plan me five days in Lisbon in October, under $2,000.\"",
+  "say": "A traveller types: Plan me five days in Lisbon in October, under two thousand dollars."
+ },
+ {
+  "scene": "atlas",
+  "cap": "Atlas has to search flights, compare hotels, remember preferences, wait for prices to drop, book things, and keep the traveller updated."
+ },
+ {
+  "scene": "atlas",
+  "cap": "In every chapter we'll build one piece of Atlas three times, once on each cloud, and then fill in a scorecard.",
+  "hold": 0.6
+ },
+ {
+  "scene": "body",
+  "cap": "Chapter one: the body. Where does Atlas actually run?"
+ },
+ {
+  "scene": "body",
+  "cap": "Here's a surprising fact about agents: most of their time is spent waiting. Waiting for the model to think, for a website to load, for a human to reply."
+ },
+ {
+  "scene": "body",
+  "cap": "So for each cloud we'll ask two questions: how does it run my agent, and do I pay while it waits?",
+  "hold": 0.5
+ },
+ {
+  "scene": "body_cf",
+  "cap": "On Cloudflare, Atlas runs as a Worker: a small function that starts in milliseconds, in hundreds of cities."
+ },
+ {
+  "scene": "body_cf",
+  "cap": "Each traveller gets their own Durable Object: a tiny computer with its own memory and its own database, that sleeps when idle and wakes up exactly where it left off."
+ },
+ {
+  "scene": "body_cf",
+  "cap": "The Agents SDK wraps all of this into one Agent class. One class, one instance per traveller.",
+  "say": "The Agents S D K wraps all of this into one Agent class. One class, one instance per traveller."
+ },
+ {
+  "scene": "body_cf",
+  "cap": "Workers bill for CPU time, not waiting time, and idle agents hibernate. So an agent that's mostly waiting stays cheap.",
+  "say": "Workers bill for C P U time, not waiting time, and idle agents hibernate. So an agent that's mostly waiting stays cheap.",
+  "hold": 0.4
+ },
+ {
+  "scene": "body_vc",
+  "cap": "On Vercel, Atlas runs as Vercel Functions, on something called Fluid compute."
+ },
+ {
+  "scene": "body_vc",
+  "cap": "With Fluid compute, one instance serves many requests at once. While one traveller's request waits for the model, the same instance helps someone else."
+ },
+ {
+  "scene": "body_vc",
+  "cap": "You pay for Active CPU, meaning only while your code is actually running, plus the memory the instance keeps reserved.",
+  "say": "You pay for Active C P U, meaning only while your code is actually running, plus the memory the instance keeps reserved."
+ },
+ {
+  "scene": "body_vc",
+  "cap": "The catch is time. A single function call is capped at 800 seconds on the Pro plan, or 30 minutes in beta."
+ },
+ {
+  "scene": "body_vc",
+  "cap": "And there's no built-in object that remembers each traveller. Vercel's own guide says Durable Objects have no direct equivalent, so Atlas keeps its state in a database or a workflow.",
+  "hold": 0.4
+ },
+ {
+  "scene": "body_aws",
+  "cap": "On AWS, the home for agents is Amazon Bedrock AgentCore Runtime.",
+  "say": "On A W S, the home for agents is Amazon Bedrock AgentCore Runtime."
+ },
+ {
+  "scene": "body_aws",
+  "cap": "Each traveller's session gets its own isolated micro virtual machine, which is wiped clean when the session ends."
+ },
+ {
+  "scene": "body_aws",
+  "cap": "A session can last up to eight hours, and a newer Instances option keeps an agent running for up to fourteen days."
+ },
+ {
+  "scene": "body_aws",
+  "cap": "AgentCore bills active usage by the second, so CPU is typically not charged while Atlas waits on the model.",
+  "say": "AgentCore bills active usage by the second, so C P U is typically not charged while Atlas waits on the model."
+ },
+ {
+  "scene": "body_aws",
+  "cap": "The trade-off is startup time. A fresh session takes about two seconds to boot, versus milliseconds for a Worker."
+ },
+ {
+  "scene": "body_aws",
+  "cap": "And classic AWS Lambda is still great for short jobs, up to fifteen minutes each, but it bills the whole time, waiting included.",
+  "say": "And classic A W S Lambda is still great for short jobs, up to fifteen minutes each, but it bills the whole time, waiting included.",
+  "hold": 0.4
+ },
+ {
+  "scene": "body_score",
+  "cap": "Let's fill in the first row of our scorecard."
+ },
+ {
+  "scene": "body_score",
+  "cap": "Cloudflare: the fastest start, and a built-in home that remembers each agent. Vercel: the smoothest path when Atlas lives inside a web app. AWS: the strongest isolation and the longest sessions.",
+  "say": "Cloudflare: the fastest start, and a built-in home that remembers each agent. Vercel: the smoothest path when Atlas lives inside a web app. A W S: the strongest isolation and the longest sessions."
+ },
+ {
+  "scene": "body_score",
+  "cap": "And notice the trend: all three now offer a way to avoid paying for CPU while an agent waits.",
+  "say": "And notice the trend: all three now offer a way to avoid paying for C P U while an agent waits.",
+  "hold": 0.6
+ },
+ {
+  "scene": "code",
+  "cap": "Chapter two: the code. Each cloud has its own open-source toolkit for writing the agent loop."
+ },
+ {
+  "scene": "code",
+  "cap": "Cloudflare has the Agents SDK. Atlas extends the Agent class, and gets state, scheduling, and a live connection to the browser, built in.",
+  "say": "Cloudflare has the Agents S D K. Atlas extends the Agent class, and gets state, scheduling, and a live connection to the browser, built in."
+ },
+ {
+  "scene": "code",
+  "cap": "Here, Atlas saves the traveller's goal, and asks to be woken up tomorrow to check prices.",
+  "hold": 0.3
+ },
+ {
+  "scene": "code_vc",
+  "cap": "Vercel has the AI SDK, the most popular TypeScript toolkit for AI apps.",
+  "say": "Vercel has the A I S D K, the most popular TypeScript toolkit for A I apps."
+ },
+ {
+  "scene": "code_vc",
+  "cap": "You give a ToolLoopAgent a model, instructions and tools, and it runs the think, act, observe loop for you.",
+  "hold": 0.3
+ },
+ {
+  "scene": "code_aws",
+  "cap": "AWS has Strands Agents, for Python and TypeScript.",
+  "say": "A W S has Strands Agents, for Python and TypeScript."
+ },
+ {
+  "scene": "code_aws",
+  "cap": "You create an Agent, hand it a list of tools, and the model decides which tools to call, and when.",
+  "hold": 0.3
+ },
+ {
+  "scene": "code_mix",
+  "cap": "Here's the good news: these toolkits aren't locked in. The AI SDK runs happily on Cloudflare Workers, and Strands runs anywhere Python runs.",
+  "say": "Here's the good news: these toolkits aren't locked in. The A I S D K runs happily on Cloudflare Workers, and Strands runs anywhere Python runs."
+ },
+ {
+  "scene": "code_mix",
+  "cap": "And if you'd rather not write the loop at all, AWS offers the AgentCore harness, and Vercel offers eve, which is still in beta. Both build agents from configuration instead of code.",
+  "say": "And if you'd rather not write the loop at all, A W S offers the AgentCore harness, and Vercel offers eve, which is still in beta. Both build agents from configuration instead of code.",
+  "hold": 0.6
+ },
+ {
+  "scene": "brain",
+  "cap": "Chapter three: the brain. Atlas needs a language model. Which models can each cloud reach, and how?"
+ },
+ {
+  "scene": "brain",
+  "cap": "There are two big ideas here. Hosting models yourself, and a gateway: a control tower that routes calls to many model providers.",
+  "hold": 0.4
+ },
+ {
+  "scene": "brain_cf",
+  "cap": "Cloudflare does both. Workers AI runs open models, like Gemma and GLM, on GPUs across its network.",
+  "say": "Cloudflare does both. Workers A I runs open models, like Gemma and G L M, on G P Us across its network."
+ },
+ {
+  "scene": "brain_cf",
+  "cap": "AI Gateway sits in front of Anthropic, OpenAI, Google and others, adding caching, rate limits, fallbacks and cost logs.",
+  "say": "A I Gateway sits in front of Anthropic, OpenAI, Google and others, adding caching, rate limits, fallbacks and cost logs."
+ },
+ {
+  "scene": "brain_cf",
+  "cap": "And since August, Workers AI and AI Gateway share one binding and one wallet, so one line of code can reach almost any model.",
+  "say": "And since August, Workers A I and A I Gateway share one binding and one wallet, so one line of code can reach almost any model.",
+  "hold": 0.4
+ },
+ {
+  "scene": "brain_vc",
+  "cap": "Vercel doesn't host its own models. Instead, its AI Gateway is one endpoint in front of about 370 models from dozens of providers.",
+  "say": "Vercel doesn't host its own models. Instead, its A I Gateway is one endpoint in front of about 370 models from dozens of providers."
+ },
+ {
+  "scene": "brain_vc",
+  "cap": "It adds no markup on tokens, fails over between providers automatically, and works from any cloud, not just Vercel."
+ },
+ {
+  "scene": "brain_vc",
+  "cap": "With the AI SDK, switching from one model to another is just changing a string.",
+  "say": "With the A I S D K, switching from one model to another is just changing a string.",
+  "hold": 0.4
+ },
+ {
+  "scene": "brain_aws",
+  "cap": "AWS has Amazon Bedrock, a huge model catalog running inside AWS: Claude, OpenAI's GPT models, Amazon's own Nova, Llama, Mistral, DeepSeek, Qwen and many more.",
+  "say": "A W S has Amazon Bedrock, a huge model catalog running inside A W S: Claude, OpenAI's G P T models, Amazon's own Nova, Llama, Mistral, DeepSeek, Kwen and many more."
+ },
+ {
+  "scene": "brain_aws",
+  "cap": "Model providers run in AWS-owned accounts they can't access, so your prompts stay inside AWS.",
+  "say": "Model providers run in A W S-owned accounts they can't access, so your prompts stay inside A W S."
+ },
+ {
+  "scene": "brain_aws",
+  "cap": "You call it with the Converse API, or with OpenAI and Anthropic compatible APIs, and you can cut costs with batch jobs, a cheaper Flex tier, and prompt caching.",
+  "say": "You call it with the Converse A P I, or with OpenAI and Anthropic compatible A P Is, and you can cut costs with batch jobs, a cheaper Flex tier, and prompt caching."
+ },
+ {
+  "scene": "brain_aws",
+  "cap": "And since July, AgentCore Gateway can also route calls to models outside AWS.",
+  "say": "And since July, AgentCore Gateway can also route calls to models outside A W S.",
+  "hold": 0.4
+ },
+ {
+  "scene": "zdr",
+  "cap": "Now, two questions every company asks before sending data to a model. First: is my data kept?"
+ },
+ {
+  "scene": "zdr",
+  "cap": "Zero data retention, or ZDR, means nobody stores your prompts or the model's answers once the request is done.",
+  "say": "Zero data retention, or Z D R, means nobody stores your prompts or the model's answers once the request is done."
+ },
+ {
+  "scene": "zdr",
+  "cap": "Cloudflare: Workers AI doesn't train on your data. For outside models paid through Cloudflare, ZDR routing covers many of them, marked model by model.",
+  "say": "Cloudflare: Workers A I doesn't train on your data. For outside models paid through Cloudflare, Z D R routing covers many of them, marked model by model."
+ },
+ {
+  "scene": "zdr",
+  "cap": "But AI Gateway logs full requests by default. For true zero retention, turn logging off, for the whole gateway or per request.",
+  "say": "But A I Gateway logs full requests by default. For true zero retention, turn logging off, for the whole gateway or per request."
+ },
+ {
+  "scene": "zdr",
+  "cap": "Vercel: its AI Gateway keeps no prompts or answers, only metadata. On Pro and Enterprise, one switch routes only to providers with zero retention, and fails rather than falling back.",
+  "say": "Vercel: its A I Gateway keeps no prompts or answers, only metadata. On Pro and Enterprise, one switch routes only to providers with zero retention, and fails rather than falling back."
+ },
+ {
+  "scene": "zdr",
+  "cap": "AWS: Bedrock doesn't store prompts or answers by default, and a data retention mode can enforce zero retention across your whole company.",
+  "say": "A W S: Bedrock doesn't store prompts or answers by default, and a data retention mode can enforce zero retention across your whole company."
+ },
+ {
+  "scene": "zdr",
+  "cap": "One caveat on all three: some of the newest frontier models keep data for up to thirty days for safety checks. So always check the model, not just the cloud.",
+  "hold": 0.5
+ },
+ {
+  "scene": "byok",
+  "cap": "Second question: can I bring my own key? BYOK means using your own contract with Anthropic or OpenAI, while the cloud just routes the calls.",
+  "say": "Second question: can I bring my own key? B Y O K means using your own contract with Anthropic or OpenAI, while the cloud just routes the calls."
+ },
+ {
+  "scene": "byok",
+  "cap": "Cloudflare: yes. Store your provider keys in AI Gateway, with no extra fee. One gotcha: if no key is found, it quietly bills your Cloudflare credits, unless you turn on \"require provider credentials\".",
+  "say": "Cloudflare: yes. Store your provider keys in A I Gateway, with no extra fee. One gotcha: if no key is found, it quietly bills your Cloudflare credits, unless you turn on require provider credentials."
+ },
+ {
+  "scene": "byok",
+  "cap": "Vercel: yes, per team or even per request, with no markup. But it requires purchased credits, and if your key fails, it automatically retries with Vercel's own keys."
+ },
+ {
+  "scene": "byok",
+  "cap": "AWS: Bedrock bills everything through your AWS account, so there's no key to bring. But AgentCore can keep your OpenAI, Gemini or Anthropic keys in a vault, so the agent never sees them.",
+  "say": "A W S: Bedrock bills everything through your A W S account, so there's no key to bring. But AgentCore can keep your OpenAI, Gemini or Anthropic keys in a vault, so the agent never sees them."
+ },
+ {
+  "scene": "byok",
+  "cap": "And if you buy models through the cloud instead: Cloudflare adds a 5% fee on credits, Vercel adds no markup, and Bedrock bills its own published prices on your AWS bill.",
+  "say": "And if you buy models through the cloud instead: Cloudflare adds a five percent fee on credits, Vercel adds no markup, and Bedrock bills its own published prices on your A W S bill.",
+  "hold": 0.5
+ },
+ {
+  "scene": "brain_score",
+  "cap": "Time for the scorecard."
+ },
+ {
+  "scene": "brain_score",
+  "cap": "Cloudflare: open models on its own GPUs, plus a gateway. Vercel: the simplest gateway, with ZDR and BYOK switches. AWS: the biggest catalog, inside one private boundary, with strict retention controls.",
+  "say": "Cloudflare: open models on its own G P Us, plus a gateway. Vercel: the simplest gateway, with Z D R and B Y O K switches. A W S: the biggest catalog, inside one private boundary, with strict retention controls.",
+  "hold": 0.6
+ },
+ {
+  "scene": "memory",
+  "cap": "Chapter four: memory. Atlas must remember the chat, the traveller's preferences, files like tickets, and facts it can search by meaning."
+ },
+ {
+  "scene": "memory",
+  "cap": "Think of it as a desk, a filing cabinet, a warehouse and a library.",
+  "hold": 0.4
+ },
+ {
+  "scene": "memory_cf",
+  "cap": "Cloudflare builds almost all of it in. Every agent has its own SQL database inside its Durable Object, so the chat lives right next to the code.",
+  "say": "Cloudflare builds almost all of it in. Every agent has its own sequel database inside its Durable Object, so the chat lives right next to the code."
+ },
+ {
+  "scene": "memory_cf",
+  "cap": "KV handles fast lookups, D1 holds shared SQL tables, and R2 stores files, with no fees for downloading them.",
+  "say": "K V handles fast lookups, D one holds shared sequel tables, and R two stores files, with no fees for downloading them."
+ },
+ {
+  "scene": "memory_cf",
+  "cap": "Vectorize and AI Search find things by meaning, and Agent Memory, in private beta, remembers facts about each user.",
+  "say": "Vectorize and A I Search find things by meaning, and Agent Memory, in private beta, remembers facts about each user.",
+  "hold": 0.4
+ },
+ {
+  "scene": "memory_vc",
+  "cap": "Vercel makes fewer of these pieces itself. Vercel Blob stores files, and Global Config, formerly Edge Config, holds small settings."
+ },
+ {
+  "scene": "memory_vc",
+  "cap": "For databases, Vercel has its Marketplace: one-click Postgres from Neon or Supabase, Redis and vectors from Upstash, all billed through Vercel."
+ },
+ {
+  "scene": "memory_vc",
+  "cap": "For agent memory, Mem0 just joined the Marketplace too. Convenient, but these are partners' products: Vercel has no database or vector store of its own.",
+  "say": "For agent memory, mem zero just joined the Marketplace too. Convenient, but these are partners' products: Vercel has no database or vector store of its own.",
+  "hold": 0.4
+ },
+ {
+  "scene": "memory_aws",
+  "cap": "AWS has the deepest shelf. AgentCore Memory keeps the short-term conversation, and pulls out long-term memories, like \"prefers window seats\".",
+  "say": "A W S has the deepest shelf. AgentCore Memory keeps the short-term conversation, and pulls out long-term memories, like prefers window seats."
+ },
+ {
+  "scene": "memory_aws",
+  "cap": "S3 stores files, DynamoDB stores fast records, and S3 Vectors keeps embeddings cheaply, right inside S3.",
+  "say": "S three stores files, Dynamo D B stores fast records, and S three Vectors keeps embeddings cheaply, right inside S three."
+ },
+ {
+  "scene": "memory_aws",
+  "cap": "Bedrock Knowledge Bases give you managed search over your documents, with connectors for SharePoint, Confluence and more."
+ },
+ {
+  "scene": "memory_aws",
+  "cap": "Powerful, but that's several services, each with its own setup and its own bill.",
+  "hold": 0.4
+ },
+ {
+  "scene": "quiz1",
+  "cap": "Quick check! Atlas runs on Vercel and needs a Postgres database for bookings. Where does it come from?",
+  "hold": 2.6
+ },
+ {
+  "scene": "quiz1",
+  "cap": "The Vercel Marketplace! Vercel doesn't make its own database, so you add Neon, Supabase or another partner in one click.",
+  "hold": 0.6
+ },
+ {
+  "scene": "memory_score",
+  "cap": "Scorecard time."
+ },
+ {
+  "scene": "memory_score",
+  "cap": "Cloudflare: everything built in, from per-agent SQL to vectors. Vercel: files plus one-click partners. AWS: the deepest set of memory services, with the most wiring.",
+  "say": "Cloudflare: everything built in, from per-agent sequel to vectors. Vercel: files plus one-click partners. A W S: the deepest set of memory services, with the most wiring.",
+  "hold": 0.6
+ },
+ {
+  "scene": "time",
+  "cap": "Chapter five: time. Atlas needs to wait for prices to drop, check back every morning, and pause for days until the traveller approves a booking."
+ },
+ {
+  "scene": "time",
+  "cap": "That's a job that must survive crashes and long waits. Let's see how each cloud keeps a promise over time.",
+  "hold": 0.4
+ },
+ {
+  "scene": "time_cf",
+  "cap": "On Cloudflare, an agent can simply schedule itself: wake me up tomorrow at nine."
+ },
+ {
+  "scene": "time_cf",
+  "cap": "Queues soak up bursts of work, and Workflows run multi-step jobs that retry each step on failure."
+ },
+ {
+  "scene": "time_cf",
+  "cap": "A workflow can even wait for an event, like the traveller tapping \"approve\", for days.",
+  "say": "A workflow can even wait for an event, like the traveller tapping approve, for days.",
+  "hold": 0.4
+ },
+ {
+  "scene": "time_vc",
+  "cap": "Vercel's answer is Vercel Workflows, built on the open-source Workflow SDK.",
+  "say": "Vercel's answer is Vercel Workflows, built on the open-source Workflow S D K."
+ },
+ {
+  "scene": "time_vc",
+  "cap": "You mark a function with \"use workflow\", and each step with \"use step\". Steps retry, and the whole run survives crashes and redeploys.",
+  "say": "You mark a function with use workflow, and each step with use step. Steps retry, and the whole run survives crashes and redeploys."
+ },
+ {
+  "scene": "time_vc",
+  "cap": "A workflow can sleep for days or months, and a run has no time limit, though each single step still fits inside a function's limit."
+ },
+ {
+  "scene": "time_vc",
+  "cap": "Vercel Queues are in public beta, and cron jobs handle the daily price check.",
+  "hold": 0.4
+ },
+ {
+  "scene": "time_aws",
+  "cap": "AWS has two answers. Step Functions draws the workflow as a diagram of states, and can now run AgentCore agents with human approval steps.",
+  "say": "A W S has two answers. Step Functions draws the workflow as a diagram of states, and can now run AgentCore agents with human approval steps."
+ },
+ {
+  "scene": "time_aws",
+  "cap": "And Lambda durable functions, new since December, let you write the workflow as plain code: do a step, then wait."
+ },
+ {
+  "scene": "time_aws",
+  "cap": "A durable run can last up to a year, and you're not billed while it waits. SQS queues and EventBridge schedules fill in the rest.",
+  "say": "A durable run can last up to a year, and you're not billed while it waits. S Q S queues and EventBridge schedules fill in the rest.",
+  "hold": 0.4
+ },
+ {
+  "scene": "time_score",
+  "cap": "Scorecard."
+ },
+ {
+  "scene": "time_score",
+  "cap": "All three now have real durable workflows. Cloudflare's live right next to the agent, Vercel's feel like plain TypeScript, and AWS gives you both diagrams and code.",
+  "say": "All three now have real durable workflows. Cloudflare's live right next to the agent, Vercel's feel like plain TypeScript, and A W S gives you both diagrams and code.",
+  "hold": 0.6
+ },
+ {
+  "scene": "hands",
+  "cap": "Chapter six: hands. Atlas needs tools: call airline APIs, browse a hotel website, and run code to crunch prices.",
+  "say": "Chapter six: hands. Atlas needs tools: call airline A P Is, browse a hotel website, and run code to crunch prices."
+ },
+ {
+  "scene": "hands",
+  "cap": "The universal plug for tools is MCP, the Model Context Protocol. All three clouds speak it.",
+  "say": "The universal plug for tools is M C P, the Model Context Protocol. All three clouds speak it.",
+  "hold": 0.4
+ },
+ {
+  "scene": "hands_cf",
+  "cap": "Cloudflare hosts MCP servers on Workers, and its own MCP server covers its entire API with just two tools: search and execute.",
+  "say": "Cloudflare hosts M C P servers on Workers, and its own M C P server covers its entire A P I with just two tools: search and execute."
+ },
+ {
+  "scene": "hands_cf",
+  "cap": "Code Mode lets the model write a little code instead of calling tools one by one, which saves a huge number of tokens."
+ },
+ {
+  "scene": "hands_cf",
+  "cap": "Browser Run gives Atlas a real browser, with a live view so a human can step in, and Sandboxes run full Linux containers for code.",
+  "hold": 0.4
+ },
+ {
+  "scene": "hands_vc",
+  "cap": "Vercel hosts MCP servers with its mcp-handler package, and the AI SDK can connect to any MCP server.",
+  "say": "Vercel hosts M C P servers with its mcp-handler package, and the A I S D K can connect to any M C P server."
+ },
+ {
+  "scene": "hands_vc",
+  "cap": "Vercel Sandbox runs untrusted code in Firecracker microVMs, for up to 24 hours per session.",
+  "say": "Vercel Sandbox runs untrusted code in Firecracker micro V Ms, for up to 24 hours per session."
+ },
+ {
+  "scene": "hands_vc",
+  "cap": "A neat trick: its firewall injects secrets into outgoing requests, so the API key never even enters the sandbox.",
+  "say": "A neat trick: its firewall injects secrets into outgoing requests, so the A P I key never even enters the sandbox."
+ },
+ {
+  "scene": "hands_vc",
+  "cap": "There's no managed browser product, so you run one inside Sandbox, or add Browserbase. And Vercel Connect hands agents short-lived tokens for Slack, GitHub and a hundred more.",
+  "hold": 0.4
+ },
+ {
+  "scene": "hands_aws",
+  "cap": "AWS has AgentCore Gateway, which turns your existing APIs and Lambda functions into MCP tools, with search for when you have hundreds of them.",
+  "say": "A W S has AgentCore Gateway, which turns your existing A P Is and Lambda functions into M C P tools, with search for when you have hundreds of them."
+ },
+ {
+  "scene": "hands_aws",
+  "cap": "AgentCore Code Interpreter runs Python and JavaScript in a sandbox, and AgentCore Browser gives Atlas a managed Chrome."
+ },
+ {
+  "scene": "hands_aws",
+  "cap": "Nova Act is an agent specialized in clicking through websites, and the AWS MCP Server lets an agent call over fifteen thousand AWS APIs, for free.",
+  "say": "Nova Act is an agent specialized in clicking through websites, and the A W S M C P Server lets an agent call over fifteen thousand A W S A P Is, for free.",
+  "hold": 0.4
+ },
+ {
+  "scene": "quiz2",
+  "cap": "Quick check! On Vercel, Atlas must safely run a Python script that the model just wrote. Which service?",
+  "hold": 2.6
+ },
+ {
+  "scene": "quiz2",
+  "cap": "Vercel Sandbox! AI-written code runs isolated in its own microVM. On Cloudflare you'd reach for Sandboxes, and on AWS, Code Interpreter.",
+  "say": "Vercel Sandbox! A I-written code runs isolated in its own micro V M. On Cloudflare you'd reach for Sandboxes, and on A W S, Code Interpreter.",
+  "hold": 0.6
+ },
+ {
+  "scene": "hands_score",
+  "cap": "Scorecard."
+ },
+ {
+  "scene": "hands_score",
+  "cap": "Cloudflare: MCP plus Code Mode, browsers and sandboxes. Vercel: the best-guarded sandbox, plus Connect for app tokens. AWS: the most managed tools, all behind one gateway.",
+  "say": "Cloudflare: M C P plus Code Mode, browsers and sandboxes. Vercel: the best-guarded sandbox, plus Connect for app tokens. A W S: the most managed tools, all behind one gateway.",
+  "hold": 0.6
+ },
+ {
+  "scene": "senses",
+  "cap": "Chapter seven: senses. How does Atlas talk to people? Through chat, voice and email."
+ },
+ {
+  "scene": "senses",
+  "cap": "Chat works everywhere, but live connections differ. Cloudflare agents keep WebSockets open and hibernate between messages, for as long as they like."
+ },
+ {
+  "scene": "senses",
+  "cap": "Vercel's WebSockets are in beta and bound by the function time limit, while AgentCore streams over WebSockets for up to an hour."
+ },
+ {
+  "scene": "senses",
+  "cap": "To reach people in Slack, Teams or WhatsApp, Vercel's Chat SDK is the easiest: write one bot, run it in many apps.",
+  "say": "To reach people in Slack, Teams or WhatsApp, Vercel's Chat S D K is the easiest: write one bot, run it in many apps.",
+  "hold": 0.4
+ },
+ {
+  "scene": "senses_2",
+  "cap": "For voice, Cloudflare has voice agents in beta, Vercel's gateway offers realtime speech models, and AWS has Nova 2 Sonic, a speech-to-speech model.",
+  "say": "For voice, Cloudflare has voice agents in beta, Vercel's gateway offers realtime speech models, and A W S has Nova 2 Sonic, a speech-to-speech model."
+ },
+ {
+  "scene": "senses_2",
+  "cap": "For email, Cloudflare Email Service lets an agent receive and send mail, in beta. AWS has SES. Vercel has no email product, so you'd use a partner like Resend.",
+  "say": "For email, Cloudflare Email Service lets an agent receive and send mail, in beta. A W S has S E S. Vercel has no email product, so you'd use a partner like Resend.",
+  "hold": 0.4
+ },
+ {
+  "scene": "senses_score",
+  "cap": "Scorecard."
+ },
+ {
+  "scene": "senses_score",
+  "cap": "Cloudflare: long-lived connections, plus email and voice. Vercel: the easiest multi-app chat bots. AWS: the most mature voice and email services.",
+  "say": "Cloudflare: long-lived connections, plus email and voice. Vercel: the easiest multi-app chat bots. A W S: the most mature voice and email services.",
+  "hold": 0.6
+ },
+ {
+  "scene": "safety",
+  "cap": "Chapter eight: safety and identity. Atlas holds personal data and can spend money, so we need locks, IDs and rules."
+ },
+ {
+  "scene": "safety",
+  "cap": "Three questions: who can talk to the agent, what can the agent touch, and can websites trust it?",
+  "hold": 0.4
+ },
+ {
+  "scene": "safety_cf",
+  "cap": "Cloudflare: Workers VPC lets Atlas reach private systems without exposing them to the internet, and MCP server portals put company tools behind one secure door.",
+  "say": "Cloudflare: Workers V P C lets Atlas reach private systems without exposing them to the internet, and M C P server portals put company tools behind one secure door."
+ },
+ {
+  "scene": "safety_cf",
+  "cap": "Web Bot Auth gives Atlas a signed passport, so websites can verify it's a real, well-behaved agent. And AI Crawl Control lets sites choose which bots get in.",
+  "say": "Web Bot Auth gives Atlas a signed passport, so websites can verify it's a real, well-behaved agent. And A I Crawl Control lets sites choose which bots get in.",
+  "hold": 0.4
+ },
+ {
+  "scene": "safety_vc",
+  "cap": "Vercel: BotID stops bots on important pages, the firewall has AI bot rules and rate limits, and OIDC gives functions short-lived cloud credentials instead of stored secrets.",
+  "say": "Vercel: bot I D stops bots on important pages, the firewall has A I bot rules and rate limits, and O I D C gives functions short-lived cloud credentials instead of stored secrets."
+ },
+ {
+  "scene": "safety_vc",
+  "cap": "Enterprise plans add Secure Compute, a private network with static IPs. It protects the web app well, but there's no signed-agent passport like Web Bot Auth.",
+  "say": "Enterprise plans add Secure Compute, a private network with static I Ps. It protects the web app well, but there's no signed-agent passport like Web Bot Auth.",
+  "hold": 0.4
+ },
+ {
+  "scene": "safety_aws",
+  "cap": "AWS has the most tools here. AgentCore Identity gives each agent its own identity, and keeps OAuth tokens and API keys in a vault.",
+  "say": "A W S has the most tools here. AgentCore Identity gives each agent its own identity, and keeps O Auth tokens and A P I keys in a vault."
+ },
+ {
+  "scene": "safety_aws",
+  "cap": "AgentCore Policy checks every tool call against rules written in a language called Cedar. The rules live outside the model, so a confused agent can't talk its way past them."
+ },
+ {
+  "scene": "safety_aws",
+  "cap": "Bedrock Guardrails filter harmful content and personal data, and AWS WAF can verify Web Bot Auth signatures too.",
+  "say": "Bedrock Guardrails filter harmful content and personal data, and A W S waff can verify Web Bot Auth signatures too.",
+  "hold": 0.4
+ },
+ {
+  "scene": "safety_score",
+  "cap": "Scorecard."
+ },
+ {
+  "scene": "safety_score",
+  "cap": "Cloudflare: private networking and verifiable bots. Vercel: strong protection for the web app. AWS: the deepest identity, policy and guardrails.",
+  "say": "Cloudflare: private networking and verifiable bots. Vercel: strong protection for the web app. A W S: the deepest identity, policy and guardrails.",
+  "hold": 0.6
+ },
+ {
+  "scene": "money",
+  "cap": "Chapter nine: money. Soon, agents will pay for things on their own, like a paid flight-price API.",
+  "say": "Chapter nine: money. Soon, agents will pay for things on their own, like a paid flight-price A P I."
+ },
+ {
+  "scene": "money",
+  "cap": "The shared idea is x402. A website answers \"payment required\", the agent pays a tiny amount, and gets the data.",
+  "say": "The shared idea is x four oh two. A website answers payment required, the agent pays a tiny amount, and gets the data."
+ },
+ {
+  "scene": "money",
+  "cap": "Cloudflare built x402 into its Agents SDK, and lets websites charge AI crawlers for access.",
+  "say": "Cloudflare built x four oh two into its Agents S D K, and lets websites charge A I crawlers for access."
+ },
+ {
+  "scene": "money",
+  "cap": "AWS went furthest. AgentCore payments, available since August, gives agents wallets with spending limits, and AWS WAF lets websites charge bots.",
+  "say": "A W S went furthest. AgentCore payments, available since August, gives agents wallets with spending limits, and A W S waff lets websites charge bots."
+ },
+ {
+  "scene": "money",
+  "cap": "Vercel had an early x402 experiment for MCP tools, but no payment product today.",
+  "say": "Vercel had an early x four oh two experiment for M C P tools, but no payment product today.",
+  "hold": 0.6
+ },
+ {
+  "scene": "ship",
+  "cap": "Chapter ten: shipping it. How do you deploy Atlas, and watch what it's doing?"
+ },
+ {
+  "scene": "ship",
+  "cap": "Vercel is famous for this. Every git push gets its own preview link, with instant rollbacks and gradual rollouts."
+ },
+ {
+  "scene": "ship",
+  "cap": "Cloudflare deploys worldwide in seconds with one command, now with Worker Previews, and Agents tracing, in beta, shows every step Atlas took."
+ },
+ {
+  "scene": "ship",
+  "cap": "AWS has AgentCore Observability in CloudWatch, plus AgentCore Evaluations, where another model grades Atlas's answers.",
+  "say": "A W S has AgentCore Observability in CloudWatch, plus AgentCore Evaluations, where another model grades Atlas's answers."
+ },
+ {
+  "scene": "ship",
+  "cap": "On AWS you'll usually describe the whole setup as code with the CDK. Powerful, but more to learn.",
+  "say": "On A W S you'll usually describe the whole setup as code with the C D K. Powerful, but more to learn.",
+  "hold": 0.6
+ },
+ {
+  "scene": "bill",
+  "cap": "Chapter eleven: the bill. How does each cloud charge for an agent like Atlas?"
+ },
+ {
+  "scene": "bill",
+  "cap": "Say Atlas spends one minute planning a trip, but only a couple of seconds of that is real computing. The rest is waiting on the model."
+ },
+ {
+  "scene": "bill",
+  "cap": "Cloudflare Workers charge CPU time only, with paid plans starting at $5 a month, and downloading files from R2 is free.",
+  "say": "Cloudflare Workers charge C P U time only, with paid plans starting at five dollars a month, and downloading files from R two is free."
+ },
+ {
+  "scene": "bill",
+  "cap": "Vercel charges Active CPU, plus the memory it keeps reserved, and has a free Hobby tier for experiments.",
+  "say": "Vercel charges Active C P U, plus the memory it keeps reserved, and has a free Hobby tier for experiments."
+ },
+ {
+  "scene": "bill",
+  "cap": "AWS AgentCore charges active CPU and memory by the second, while classic Lambda charges the whole minute. And every extra, like memory, tool calls and logs, has its own meter.",
+  "say": "A W S AgentCore charges active C P U and memory by the second, while classic Lambda charges the whole minute. And every extra, like memory, tool calls and logs, has its own meter."
+ },
+ {
+  "scene": "bill",
+  "cap": "Model tokens usually dwarf all of this, which is why gateways, caching and cheaper models matter most.",
+  "hold": 0.6
+ },
+ {
+  "scene": "scoreboard",
+  "cap": "Let's put the whole scorecard together."
+ },
+ {
+  "scene": "scoreboard",
+  "cap": "Body and code: Cloudflare for instant agents that remember, Vercel for agents inside web apps, and AWS for long, isolated sessions.",
+  "say": "Body and code: Cloudflare for instant agents that remember, Vercel for agents inside web apps, and A W S for long, isolated sessions."
+ },
+ {
+  "scene": "scoreboard",
+  "cap": "Brain and memory: Cloudflare hosts open models with storage built in, Vercel has the simplest gateway with partners for storage, and AWS has the biggest catalog and the deepest memory.",
+  "say": "Brain and memory: Cloudflare hosts open models with storage built in, Vercel has the simplest gateway with partners for storage, and A W S has the biggest catalog and the deepest memory."
+ },
+ {
+  "scene": "scoreboard",
+  "cap": "Time and hands: all three have durable workflows and sandboxes. AWS manages the most tools for you, Cloudflare runs them most efficiently, and Vercel makes them feel easiest.",
+  "say": "Time and hands: all three have durable workflows and sandboxes. A W S manages the most tools for you, Cloudflare runs them most efficiently, and Vercel makes them feel easiest."
+ },
+ {
+  "scene": "scoreboard",
+  "cap": "Safety and money: AWS leads on identity, policy and payments, and Cloudflare leads on proving an agent is trustworthy.",
+  "say": "Safety and money: A W S leads on identity, policy and payments, and Cloudflare leads on proving an agent is trustworthy.",
+  "hold": 0.8
+ },
+ {
+  "scene": "pick",
+  "cap": "So which one should you pick? It depends on who you are."
+ },
+ {
+  "scene": "pick",
+  "cap": "If your agent lives inside a Next.js app and you want to ship fast, start with Vercel.",
+  "say": "If your agent lives inside a Next J S app and you want to ship fast, start with Vercel."
+ },
+ {
+  "scene": "pick",
+  "cap": "If you want millions of always-on agents, each with its own state, running close to users at low cost, pick Cloudflare."
+ },
+ {
+  "scene": "pick",
+  "cap": "If your company already runs on AWS, with strict compliance and data rules, AgentCore and Bedrock fit right in.",
+  "say": "If your company already runs on A W S, with strict compliance and data rules, AgentCore and Bedrock fit right in."
+ },
+ {
+  "scene": "pick",
+  "cap": "And you can mix: the AI SDK runs on Cloudflare, Vercel's gateway can reach Bedrock, and MCP connects them all.",
+  "say": "And you can mix: the A I S D K runs on Cloudflare, Vercel's gateway can reach Bedrock, and M C P connects them all.",
+  "hold": 0.6
+ },
+ {
+  "scene": "quiz3",
+  "cap": "Last quick check! A bank on AWS wants every tool call its agent makes checked against strict rules, outside the model. Which service?",
+  "say": "Last quick check! A bank on A W S wants every tool call its agent makes checked against strict rules, outside the model. Which service?",
+  "hold": 2.6
+ },
+ {
+  "scene": "quiz3",
+  "cap": "AgentCore Policy! Its Cedar rules check every tool call at the gateway, no matter what the model says.",
+  "hold": 0.6
+ },
+ {
+  "scene": "outro",
+  "cap": "You don't have to choose forever. Start with the cloud that fits your team, keep your agent code portable, and swap pieces as you grow."
+ },
+ {
+  "scene": "outro",
+  "cap": "Product names and statuses change fast, so check each provider's docs before you build."
+ },
+ {
+  "scene": "outro",
+  "cap": "Thanks for learning with me. Now go build an agent, on any cloud!",
+  "hold": 2.0
+ }
+]
