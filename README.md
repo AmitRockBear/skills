@@ -1,10 +1,3 @@
-# Skills
-
-## Examples
-
-- [Explainer video: AI agent clouds compared](examples/explainer-video/ai-agent-clouds-compared.mp4)
-- [Verify change: TodoMVC demo](examples/verify-change/review.mp4)
-
 ## Skills
 
 | Skill | What it does |
@@ -29,6 +22,11 @@
 | [use-cursor](skills/use-cursor/SKILL.md) | Runs resumable tasks through Cursor CLI. |
 | [verify-change](skills/verify-change/SKILL.md) | Checks running behavior and records evidence. |
 | [write-skill](skills/write-skill/SKILL.md) | Turns workflows into reusable skills. |
+
+## Examples
+
+- [Explainer video: AI agent clouds compared](examples/explainer-video/ai-agent-clouds-compared.mp4)
+- [Verify change: TodoMVC demo](examples/verify-change/review.mp4)
 
 ## Credits
 
