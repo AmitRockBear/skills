@@ -1,6 +1,6 @@
 # Licensing and attribution
 
-Original skill instructions, documentation, and scripts by Amit Rockach are licensed under the root [MIT license](LICENSE), copyright (c) 2026 Amit Rockach, except the material explicitly excluded below. Existing third-party licenses and copyright notices retain their scope.
+Original skill instructions, documentation, and scripts are licensed under the root [MIT license](LICENSE), except the material explicitly excluded below. Existing third-party licenses and copyright notices retain their scope.
 
 | Material | Source and status |
 | --- | --- |
@@ -10,7 +10,7 @@ Original skill instructions, documentation, and scripts by Amit Rockach are lice
 | `skills/typescript-best-practices` | Lauren Tan’s pstack, including its patterns reference; [source and changes](skills/typescript-best-practices/SOURCE.md), [MIT license](skills/typescript-best-practices/LICENSE). |
 | `skills/babysit-pr` and `skills/html-communication` | Inspired by Theo (t3.gg)’s own skills shared in his livestreams. This acknowledges inspiration, not an upstream license grant. |
 | Default presenter mascot | `skills/explainer-video/mascots/presenter/` is supplied under its included MIT license to the extent the contributor holds licensable rights. See its [generation provenance](skills/explainer-video/mascots/presenter/SOURCE.md). No exclusive copyright in generated material is asserted. |
-| Other skill text and scripts | Original material by Amit Rockach is covered by the root MIT license. Identified third-party material retains its own terms. |
+| Other skill text and scripts | Original material is covered by the root MIT license. Identified third-party material retains its own terms. |
 | Personal example media | Example MP4s and poster images are excluded from the root MIT grant. They are provided as examples; this repository grants no additional permission to reuse those media assets. Rights available under applicable law remain unaffected. Mascot rendering code and the code-only starter remain MIT. |
 
 `skills/babysit-pr` remains excluded from the root MIT grant because its overlapping third-party wording has no verified redistribution license.
@@ -19,7 +19,7 @@ Downloaded tools, voice models, browser binaries, and libraries keep their own u
 
 ## Personal mascot and external prompt
 
-The example video contains a personal mascot that Amit Rockach generated using his own image and the Grokbot Icon prompt by [@multi_serio_ai (APG)](https://x.com/Multi_Serio_Ai), then adapted it into a full-body animated video character.
+The example video contains a personal mascot generated from the author's image using the Grokbot Icon prompt by [@multi_serio_ai (APG)](https://x.com/Multi_Serio_Ai), then adapted into a full-body animated video character.
 
 The external [Grokbot Icon prompt](https://grokbot-icon-studio.serio-ai.chatgpt.site/en) is linked, not bundled or relicensed. Its [license notice](https://grokbot-icon-studio.serio-ai.chatgpt.site/en/license), inspected on September 26, 2026 and last revised September 22, 2026, assigns CC BY-NC 4.0 to covered prompt versions. Commercial use of the prompt requires separate permission where the license is needed. Attribution does not replace that permission.
 
