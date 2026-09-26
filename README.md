@@ -1,6 +1,6 @@
 # Skills
 
-Amit Rockach’s agent skills for planning, implementation, review, verification, and visual explanations. Each skill has a `SKILL.md` entry point; references and scripts travel with it.
+Agent skills for planning, implementation, review, verification, and visual explanations. Each skill has a `SKILL.md` entry point; references and scripts travel with it.
 
 Original skills and scripts are [MIT licensed](LICENSE), with third-party notices and explicit exceptions in [licensing and attribution](LICENSING.md). This is a local release candidate.
 

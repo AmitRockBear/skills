@@ -1,6 +1,6 @@
 # Default presenter
 
-Original AI-generated character selected by Amit Rockach from candidate C on September 26, 2026, using the built-in image-generation tool. The concept used an independently written prompt, without external mascot prompts, personal photos, or branded character references. The production sprite used only that generated concept sheet as its reference.
+Original AI-generated character selected from candidate C on September 26, 2026, using the built-in image-generation tool. The concept used an independently written prompt, without external mascot prompts, personal photos, or branded character references. The production sprite used only that generated concept sheet as its reference.
 
 The sprite was prepared for animation with the skill’s `prep_mascot.py`: eyes are drawn by the runtime, which also supplies the mouth, expressions and body motion. The PNG alone therefore has a blank face.
 
