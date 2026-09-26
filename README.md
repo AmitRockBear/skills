@@ -30,8 +30,8 @@
 
 ## Credits
 
-- Matt Pocock's skills inspired the adapted `grilling` skill.
-- Lauren Tan's pstack is the source of `boundary-discipline`, `type-system-discipline`, and `typescript-best-practices`.
-- Theo's own skills, shared in his t3.gg livestreams, inspired `babysit-pr` and `html-communication`.
+- `grilling` is adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills).
+- [Lauren Tan's pstack](https://github.com/cursor/plugins/tree/main/pstack) is the source of `boundary-discipline`, `type-system-discipline`, and `typescript-best-practices`, and inspired `verify-change`.
+- Theo's own skills, shared in his t3.gg livestreams, inspired `babysit-pr`, `html-communication`, `use-codex`, and `use-claude`.
 
 [MIT license](LICENSE), with [third-party notices and exclusions](LICENSING.md).
